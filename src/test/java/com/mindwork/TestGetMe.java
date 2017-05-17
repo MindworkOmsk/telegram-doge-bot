@@ -2,7 +2,8 @@ package com.mindwork;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mindwork.model.get_me.GetMe;
+import com.mindwork.model.receive.method.GetMe;
+import com.mindwork.util.Token;
 import org.glassfish.jersey.client.ClientConfig;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,29 +21,19 @@ import java.util.Properties;
 public class TestGetMe {
 
     @Test
-    public void testGetMe() {
-        GetMe me = null;
+    public void testGetMe() throws IOException {
+        Client client = ClientBuilder.newClient(new ClientConfig());
+        String entity = client.target("https://api.telegram.org/bot" + Token.getToken() + "/getMe")
+                .request()
+                .get(String.class);
 
-        try (InputStream is = App.class.getClassLoader().getResourceAsStream("private.properties")) {
-            Properties prop = new Properties();
-            prop.load(is);
-            String token = prop.getProperty("telegram.token");
+        System.out.println(entity);
 
-            Client client = ClientBuilder.newClient(new ClientConfig());
-            String entity = client.target("https://api.telegram.org/bot" + token + "/getMe")
-                    .request()
-                    .get(String.class);
+        ObjectMapper mapper = new ObjectMapper();
 
-            System.out.println(entity);
+        GetMe me = mapper.readValue(entity, GetMe.class);
 
-            ObjectMapper mapper = new ObjectMapper();
-
-            me = mapper.readValue(entity, GetMe.class);
-
-            System.out.println(me.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println(me.toString());
 
         Assert.assertNotNull(me);
         Assert.assertEquals(me.getOk(), true);

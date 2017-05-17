@@ -1,20 +1,17 @@
-package com.mindwork.model.get_me;
+package com.mindwork.model.receive.method;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import com.mindwork.model.receive.User;
+import lombok.Data;
 import lombok.ToString;
 
+@Data
 @ToString
 public class GetMe {
 
-    @Getter
-    @Setter
     private Boolean ok;
 
-    @Getter
-    @Setter
     @JsonProperty(value = "result")
-    private BotInfo botInfo;
+    private User user;
 }
