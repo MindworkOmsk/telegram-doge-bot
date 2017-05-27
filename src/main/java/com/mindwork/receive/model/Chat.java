@@ -1,4 +1,4 @@
-package com.mindwork.model.receive;
+package com.mindwork.receive.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

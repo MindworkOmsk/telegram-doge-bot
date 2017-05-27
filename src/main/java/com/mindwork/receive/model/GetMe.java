@@ -1,13 +1,12 @@
-package com.mindwork.model.receive.method;
+package com.mindwork.receive.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mindwork.model.receive.User;
+import com.mindwork.receive.model.User;
 import lombok.Data;
 import lombok.ToString;
 
 @Data
-@ToString
 public class GetMe {
 
     private Boolean ok;

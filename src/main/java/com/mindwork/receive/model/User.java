@@ -1,24 +1,25 @@
-package com.mindwork.model.receive;
+package com.mindwork.receive.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@ToString
+@Data
 public class User {
 
-    @Getter
-    @Setter
     private Integer id;
 
-    @Getter
-    @Setter
     @JsonProperty(value = "first_name")
     private String firstName;
 
-    @Getter
-    @Setter
+    @JsonProperty(value = "last_name")
+    private String lastname;
+
     private String username;
+
+    @JsonProperty(value = "language_code")
+    private String languageCode;
 }
